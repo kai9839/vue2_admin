@@ -21,6 +21,11 @@ const routes = [
         path: '', // path为空， 回作为默认子路由渲染
         name: 'home',
         component: () => import('@/views/home'),
+      },
+      {
+        path: '/article',
+        name: 'article',
+        component: () => import('@/views/article')
       }
     ]
   }
@@ -38,7 +43,8 @@ router.beforeEach((to, from, next) => {
   // 需要登录的路由：地址是以 /member 开头
   const { profile } = store.state.user
   if (!profile.token && to.path !== '/login') {
-    return next('/login')
+    next(false);
+    return next('/login');
   }
   next()
 })

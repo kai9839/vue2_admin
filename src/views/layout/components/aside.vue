@@ -3,10 +3,11 @@
       el-menu-item 的 index 不能重复，确保唯一即可
      -->
     <div class="menu">
+
         <el-menu class="nav-menu" default-active="/" background-color="#002033" text-color="#fff"
-            active-text-color="#ffd04b" router :collapse="is_Collapse" collapse-transition="true">
+            active-text-color="#ffd04b" router :collapse="isCollapse" :collapse-transition="isCollapse">
             <div class="logo">
-                <img :class="{ 'no_collapse': is_Collapse }" src="@/assets/img/logo.png">
+                <img :class="{ 'no_collapse': isCollapse }" src="@/assets/img/logo.png">
             </div>
             <el-menu-item index="/">
                 <i class="el-icon-s-home"></i>
@@ -42,8 +43,12 @@
   
 <script>
 export default {
-    name: 'AppAside',
-    props: ['is_Collapse']
+    name: 'Aside',
+    computed: {
+        isCollapse() {
+            return this.$store.state.tab.isCollapse
+        }
+    }
 }
 </script>
   
@@ -54,7 +59,8 @@ export default {
 
     .nav-menu {
         height: 100%;
-        transition: all 0.5s;
+        transition: all 0.2s;
+        border-right: 0;
 
         .el-menu-item {
             background-color: #fff;
@@ -81,4 +87,5 @@ export default {
             padding-left: 5px;
         }
     }
-}</style>
+}
+</style>
