@@ -13,7 +13,6 @@
                         }"
                         @click="isCollapse = !isCollapse"
                         ></i>
-                        <span>后台管理系统</span>
                     </div>
                     <el-dropdown>
                         <div class="avatar-wrap">
@@ -86,10 +85,6 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-}
-
-.aside {
-    background-color: #d3dce6;
 }
 
 .header {
