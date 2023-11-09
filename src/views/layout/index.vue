@@ -7,6 +7,7 @@
             <el-header class="header">
                 <AppHeader />
             </el-header>
+            <AppTags />
             <el-main class="main">
                 <!-- 子路由出口 -->
                 <router-view />
@@ -18,11 +19,13 @@
 <script>
 import AppAside from './components/aside'
 import AppHeader from './components/header'
+import AppTags from '@/components/Tag.vue'
 export default {
     name: 'LayoutIndex',
     components: {
         AppAside,
-        AppHeader
+        AppHeader,
+        AppTags
     },
     data() {
         return {

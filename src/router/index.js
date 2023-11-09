@@ -14,7 +14,6 @@ const routes = [
   },
   {
     path: '/',
-    name: 'layout',
     component: () => import('@/views/layout'),
     children: [
       {
@@ -26,6 +25,11 @@ const routes = [
         path: '/article',
         name: 'article',
         component: () => import('@/views/article')
+      },
+      {
+        path: '/material',
+        name: 'material',
+        component: () => import('@/views/material')
       }
     ]
   }
@@ -43,6 +47,7 @@ router.beforeEach((to, from, next) => {
   // 需要登录的路由：地址是以 /member 开头
   const { profile } = store.state.user
   if (!profile.token && to.path !== '/login') {
+    localStorage.removeItem('article_admin_system')
     next(false);
     return next('/login');
   }

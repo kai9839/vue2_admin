@@ -84,6 +84,11 @@ export default {
             this.loginLoading = true
 
             login(this.user).then(res => {
+                // 成功
+                // 1. 存储信息
+                const { id, account, nickname, avatar, token, mobile } = res.result
+                // console.log(id, account, nickname, avatar, token, mobile)
+                this.$store.commit('user/setUser', { id, account, nickname, avatar, token, mobile })
                 this.$message({
                     message: '登录成功',
                     type: 'success'
@@ -91,11 +96,7 @@ export default {
                 this.$router.push({
                     name: 'home'
                 })
-                // 成功
-                // 1. 存储信息
-                const { id, account, nickname, avatar, token, mobile } = res.result
-                // console.log(id, account, nickname, avatar, token, mobile)
-                this.$store.commit('user/setUser', { id, account, nickname, avatar, token, mobile })
+                
                 // 登录成功
                 this.loginLoading = false
             }).catch(err => {

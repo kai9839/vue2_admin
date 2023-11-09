@@ -1,7 +1,4 @@
 <template>
-    <!--
-      el-menu-item 的 index 不能重复，确保唯一即可
-     -->
     <div class="menu">
 
         <el-menu class="nav-menu" default-active="/" background-color="#002033" text-color="#fff"
@@ -9,45 +6,85 @@
             <div class="logo">
                 <img :class="{ 'no_collapse': isCollapse }" src="@/assets/img/logo.png">
             </div>
-            <el-menu-item index="/">
-                <i class="el-icon-s-home"></i>
-                <span slot="title">首页</span>
-            </el-menu-item>
-            <el-menu-item index="/article">
-                <i class="el-icon-document"></i>
-                <span slot="title">内容管理</span>
-            </el-menu-item>
-            <el-menu-item index="/image">
-                <i class="iconfont iconimage"></i>
-                <span slot="title">素材管理</span>
-            </el-menu-item>
-            <el-menu-item index="/publish">
-                <i class="iconfont iconpublish"></i>
-                <span slot="title">发布文章</span>
-            </el-menu-item>
-            <el-menu-item index="/comment">
-                <i class="iconfont iconcomment"></i>
-                <span slot="title">评论管理</span>
-            </el-menu-item>
-            <el-menu-item index="/fans">
-                <i class="el-icon-setting"></i>
-                <span slot="title">粉丝管理</span>
-            </el-menu-item>
-            <el-menu-item index="/settings">
-                <i class="el-icon-setting"></i>
-                <span slot="title">个人设置</span>
-            </el-menu-item>
+            <menuNav :menuData="menuData"></menuNav>
         </el-menu>
     </div>
 </template>
   
 <script>
+import menuNav from './menuNav.vue';
 export default {
     name: 'Aside',
+    data() {
+        return {
+            menuData: [
+                {
+                    path: "/",
+                    name: 'home',
+                    label: '首页',
+                    icon: 's-home',
+                },
+                {
+                    path: "/article",
+                    name: 'article',
+                    label: '内容管理',
+                    icon: 'document',
+                },
+                {
+                    path: "/material",
+                    name: 'material',
+                    label: '素材管理',
+                    icon: 'picture-outline',
+                    children: [
+                        {
+                            path: "/imagess",
+                            name: 'imagess',
+                            label: '图片管理',
+                            icon: 'picture-outline',
+                        },
+                        {
+                            path: "/image",
+                            name: 'image',
+                            label: ' 音频管理',
+                            icon: 'picture-outline',
+                            children: [
+                                {
+                                    path: "/imagess",
+                                    name: 'imagess',
+                                    label: '图片管理',
+                                    icon: 'picture-outline',
+                                },
+                                {
+                                    path: "/image",
+                                    name: 'image',
+                                    label: ' 音频管理',
+                                    icon: 'picture-outline',
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    path: "/publish",
+                    name: 'publish',
+                    label: '发布文章',
+                    icon: 's-promotion',
+                },
+                {
+                    path: "/settings",
+                    name: 'settings',
+                    label: '个人设置',
+                    icon: 'setting',
+                },
+            ]
+        }
+    },
+    components: { menuNav },
     computed: {
         isCollapse() {
             return this.$store.state.tab.isCollapse
-        }
+        },
+
     }
 }
 </script>

@@ -1,11 +1,17 @@
 <template>
     <div class="header-container">
-        <div>
+        <div class="header-left">
             <i class="collapseBtn" :class="{
                 'el-icon-s-fold': isCollapse,
                 'el-icon-s-unfold': !isCollapse
             }" @click="handleMenu"></i>
-            <span class="text">首页</span>
+            <!-- <span class="text">首页</span> -->
+            <el-breadcrumb separator="/" class="text">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
+                <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+                <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+            </el-breadcrumb>
         </div>
         <el-dropdown>
             <div class="avatar-wrap">
@@ -30,7 +36,7 @@ export default {
         }
     },
     methods: {
-        handleMenu () {
+        handleMenu() {
             this.$store.commit('collapseMenu')
         },
         onLogout() {
@@ -61,32 +67,48 @@ export default {
 </script>
 
 <style lang="less" scoped>
- .header-container {
-        width: 100%;
-        height: 100%;
+.header-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+
+
+    .header-left {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid #ccc;
+
+        .el-breadcrumb__separator {
+            color: white;
+        }
 
         .collapseBtn {
             font-size: 20px;
         }
+    }
 
-        .text {
-            margin-left: 10px;
-        }
+    .text {
+        margin-left: 10px;
+    }
 
-        .avatar-wrap {
-            display: flex;
-            align-items: center;
+    .avatar-wrap {
+        display: flex;
+        align-items: center;
 
-            .avatar {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                margin-right: 10px;
-            }
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
         }
     }
+}
+
+.el-breadcrumb {
+    ::v-deep .el-breadcrumb__separator {
+        color: white;
+    }
+}
 </style>
